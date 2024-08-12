@@ -5,7 +5,7 @@
         <td>{{user.registration_date}}</td>
         <td>{{user.rating}}</td>
         <td>
-            <button @click="showDialog" class="table-btn">
+            <button @click="$emit('show', true)" class="table-btn">
                 <img src="../../assets/remove-icon.svg" alt="remove-icon">
             </button>
         </td>
@@ -26,7 +26,9 @@ export default {
     },
     methods: {
         showDialog() {
-            this.$emit('update:show', true)
+            this.$emit('show', true)
+            console.log(this.show);
+            
         }
     }
 }

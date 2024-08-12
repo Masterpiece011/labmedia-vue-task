@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <user-item v-for="user in users" :key="user.id" :user="user" @remove="$emit('remove', user)" :show="show"></user-item>
+            <user-item v-for="user in users" :key="user.id" :user="user" :show="show" @remove="$emit('remove', user)" @show="$emit('show', true)"></user-item>
         </tbody>
     </table>
 </template>
@@ -29,8 +29,7 @@ export default {
             required: true
         },
         show: {
-            type: Boolean,
-            default:false
+            type: Boolean
         }
     }
 }

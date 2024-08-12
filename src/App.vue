@@ -25,7 +25,7 @@
         <sort-button class="main__sort-btn">Дата регистрации</sort-button>
         <sort-button class="main__sort-btn">Рейтинг</sort-button>
       </div>
-      <users-table :users="searchedUsers" :show="dialogVisible"></users-table>
+      <users-table :users="searchedUsers" v-model:show="dialogVisible" @show="showDialog" @remove="removeUser"></users-table>
     </main>
     <footer class="footer">
       <remove-dialog v-model:show="dialogVisible" @remove="removeUser"></remove-dialog>
@@ -73,6 +73,9 @@
       },
       removeUser(user) {
         this.users = this.users.filter(u => u.id !== user.id)
+      },
+      showDialog() {
+        this.dialogVisible = true
       }
       
     },
@@ -94,8 +97,6 @@
         console.log(user);
       })
     },
-
-
   }
 </script>
 
@@ -130,7 +131,7 @@
     display: flex;
     align-self: flex-start;
   }
-  
+
   .header__clear img {
     height: 16px;
     width: 16px;
