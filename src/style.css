@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+:root {
+  --text-color: #9EAAB4;
+  --table-username-color: #0CB4F1;
+  --btn-active-color: #333333;
+  --box-shadow: rgba(148, 148, 148, 0.1490196078) 0 18px 15px 0;
+  --body-bkg: #F7F7F7;
+  --dialog-bkg: #fff;
+  --dialog-btn-bkg: #E0E0E0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #F7F7F7;
+  overflow-x: hidden;
+  background-color: var(--body-bkg);
+  color: var(--btn-active-color);
+}
+
+
+.container {
+  margin: 0 auto;
+  width: 961px;
+}
