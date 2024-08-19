@@ -1,7 +1,7 @@
 <template>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="table-heading">
                 <th>Имя пользователя</th>
                 <th>E-mail</th>
                 <th>Дата регистрации</th>
@@ -9,9 +9,20 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            <user-item v-for="user in users" :key="user.id" :user="user" :show="show" @remove="$emit('remove', user)" @show="$emit('show', true)"></user-item>
+        <tbody v-if="users.length > 0" >
+            <user-item 
+            class="table-row"
+            v-for="user in users" 
+            :key="user.id" 
+            :user="user" 
+            :show="show" 
+            @show="$emit('show', true)"
+            @change-user="$emit('change-user', user.id)"
+            />
         </tbody>
+        <div v-else class="message">
+            {{ message }}
+        </div>
     </table>
 </template>
 
@@ -30,6 +41,21 @@ export default {
         },
         show: {
             type: Boolean
+        },
+        searchQuery: {
+            type: String
+        }
+    },
+    computed: {
+        message() {
+            if (this.users.length === 0) {
+                if (this.searchQuery) {
+                    return `Пользователь по запросу "${this.searchQuery}" не найден`;
+                } else {
+                    return 'Пользователи загружаются...';
+                }
+            }
+            return '';
         }
     }
 }
@@ -37,27 +63,55 @@ export default {
 
 <style scoped>
     .table {
-        display: block;
-    }
-    .table tr {
         width: 100%;
-        padding-top: 14px;
+        height: 331px;
+        background: var(--dialog-bkg);
+        padding: 0 16px;
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
     }
 
-    .table tr:first-child {
-        padding-top: 16px;
+    .table-row,
+    .table-heading {
+        padding: 14px 0 22px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--body-bkg);
+    }
+
+    .table-heading {
+        padding: 16px 0 22px;
     }
 
     .table tr th,
     .table tr td {
-        width: 247px;
         text-align: left;
+        width: 200px;
     }
-
-    .table tr th {
+    .table-heading th {
         font-weight: 500;
         font-size: 10px;
         line-height: 14px;
+        color: var(--text-color);
+        height: 16px;
+    }
+
+    .table-heading th:last-child {
+        width: 30px;
+    }
+
+    .table tr:last-child {
+        border-bottom: none;
+    }
+
+    .message {
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 14px;
+        padding-top: 14px;
         color: var(--text-color);
     }
 

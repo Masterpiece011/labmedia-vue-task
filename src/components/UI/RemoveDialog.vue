@@ -3,7 +3,7 @@
         <div class="dialog-content">
             <p>Вы уверены, что хотите удалить пользователя?</p>
             <div class="btns">
-                <button class="btn" @click="$emit('remove', post)">Да</button>
+                <button class="btn" @click="removeUser">Да</button>
                 <button class="btn" @click="hideDialog">Нет</button>
             </div>
         </div>
@@ -17,10 +17,17 @@ export default {
         show: {
             type: Boolean,
             default: false,
+        },
+        userId: {
+            type: Number
         }
     },
     methods: {
         hideDialog() {
+            this.$emit('update:show', false)
+        },
+        removeUser() {
+            this.$emit('remove', this.userId)
             this.$emit('update:show', false)
         }
     }

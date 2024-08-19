@@ -5,7 +5,9 @@
         <td>{{user.registration_date}}</td>
         <td>{{user.rating}}</td>
         <td>
-            <button @click="$emit('show', true)" class="table-btn">
+            <button class="table-btn"
+            @click="changeUserId"
+            >
                 <img src="../../assets/remove-icon.svg" alt="remove-icon">
             </button>
         </td>
@@ -27,18 +29,19 @@ export default {
     methods: {
         showDialog() {
             this.$emit('show', true)
-            console.log(this.show);
-            
+        },
+        changeUserId(user) {
+            this.$emit('show', true)
+            this.$emit('change-user', user.id)
         }
     }
 }
 </script>
 
 <style scoped>
-    
+
     .table-row td {
-        padding-top: 14px;
-        width: 247px;
+        width: 200px;
         text-align: left;
         font-weight: 500;
         font-size: 12px;
@@ -48,6 +51,11 @@ export default {
 
     .table-row td:first-child {
         color: var(--table-username-color);
+        font-weight: 700;
+    }
+
+    .table-row td:last-child {
+        width: 30px;
     }
 
     .table-row td:last-child  .table-btn {
@@ -58,6 +66,9 @@ export default {
         background: none;
         border: none;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 
